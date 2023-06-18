@@ -105,7 +105,7 @@ class EmojiGame extends Component {
               )
             </div>
             ) */}
-            {score !== 0 ? (
+            {check ? (
               <div>
                 <NavBar scoreDetails={{score, topScore, check}} />
                 <WinOrLoseCard
