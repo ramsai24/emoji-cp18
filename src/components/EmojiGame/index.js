@@ -20,7 +20,7 @@ class EmojiGame extends Component {
 
   emojiClick = ids => {
     console.log(ids)
-    const {score, id, emojisLists} = this.state
+    const {id, emojisLists} = this.state
     // const emojisList = {
     //   emojisList: this.shuffledEmojisList(emojisLists.emojisList),
     // }
@@ -56,12 +56,26 @@ class EmojiGame extends Component {
       this.setState({score: 0, topScore: 0})
     } else {
       if (score > topScore) {
-        this.setState({score: 0, topScore: score})
+        this.setState({
+          score: 0,
+          topScore: score,
+          emojisLists: {
+            emojisList: shuffledEmojisList(emojisLists.emojisList),
+          },
+          id: '',
+        })
       }
       //   else if (score > topScore) {
       //     this.setState({score: 0, topScore: score})
       //   }
-      this.setState(prev => ({score: 0, topScore: prev.topScore}))
+      this.setState(prev => ({
+        score: 0,
+        topScore: prev.topScore,
+        emojisLists: {
+          emojisList: shuffledEmojisList(emojisLists.emojisList),
+        },
+        id: '',
+      }))
 
       // this.setState({score: 0, topScore: score})
     }
@@ -73,8 +87,11 @@ class EmojiGame extends Component {
     console.log(emojisLists)
     console.log(this.state)
     console.log(Lst === emojisLists)
+    const check = Lst === emojisLists
+    console.log(check)
 
     if (Lst === emojisLists) {
+      console.log(check)
       return (
         <div className="app-container">
           <div className="bg-container">
@@ -90,16 +107,15 @@ class EmojiGame extends Component {
             ) */}
             {score !== 0 ? (
               <div>
-                <NavBar scoreDetails={{score, topScore}} />
+                <NavBar scoreDetails={{score, topScore, check}} />
                 <WinOrLoseCard
                   scoreBoard={{score, topScore, emojisLists}}
                   playAgainBtn={this.playAgain}
                 />
-                )
               </div>
             ) : (
               <div>
-                <NavBar scoreDetails={{score, topScore}} />(
+                <NavBar scoreDetails={{score, topScore}} checks={check} />
                 <ul className="emoji-List-Items">
                   {emojisLists.emojisList.map(each => (
                     <EmojiCard
@@ -122,16 +138,18 @@ class EmojiGame extends Component {
           <div>
             {score === emojisLists.emojisList.length ? (
               <div>
-                <NavBar scoreDetails={{score, topScore}} />
+                <NavBar scoreDetails={{score, topScore, check}} />
                 <WinOrLoseCard
                   scoreBoard={{score, topScore, emojisLists}}
                   playAgainBtn={this.playAgain}
                 />
-                )
               </div>
             ) : (
               <div>
-                <NavBar scoreDetails={{score, topScore}} />
+                <NavBar
+                  scoreDetails={{score, topScore, check}}
+                  checks={check}
+                />
                 <ul className="emoji-List-Items">
                   {emojisLists.emojisList.map(each => (
                     <EmojiCard
