@@ -9,14 +9,12 @@ import NavBar from '../NavBar'
 import EmojiCard from '../EmojiCard'
 import WinOrLoseCard from '../WinOrLoseCard'
 
-let Lst
-
 const shuffledEmojisList = emojisList =>
   // const {emojisList} = this.props
   emojisList.sort(() => Math.random() - 0.5)
 
 class EmojiGame extends Component {
-  state = {score: 0, topScore: 0, emojisLists: this.props, id: ''}
+  state = {score: 0, topScore: 0, emojisLists: this.props, id: '', lst: ''}
 
   emojiClick = ids => {
     console.log(ids)
@@ -46,7 +44,8 @@ class EmojiGame extends Component {
       //   }
     } else {
       console.log('game failed')
-      Lst = emojisLists
+      // Lst = emojisLists
+      this.setState({lst: emojisLists})
     }
   }
 
@@ -65,9 +64,6 @@ class EmojiGame extends Component {
           id: '',
         })
       }
-      //   else if (score > topScore) {
-      //     this.setState({score: 0, topScore: score})
-      //   }
       this.setState(prev => ({
         score: 0,
         topScore: prev.topScore,
@@ -76,21 +72,21 @@ class EmojiGame extends Component {
         },
         id: '',
       }))
-
-      // this.setState({score: 0, topScore: score})
     }
+
+    // this.setState({score: 0, topScore: score})
   }
 
   render() {
-    const {score, topScore, emojisLists} = this.state
+    const {score, topScore, emojisLists, lst} = this.state
     // const {emojisList} = this.props
     console.log(emojisLists)
     console.log(this.state)
-    console.log(Lst === emojisLists)
-    const check = Lst === emojisLists
+    console.log(lst === emojisLists)
+    const check = lst === emojisLists
     console.log(check)
 
-    if (Lst === emojisLists) {
+    if (lst === emojisLists) {
       console.log(check)
       return (
         <div className="app-container">
@@ -105,7 +101,7 @@ class EmojiGame extends Component {
               )
             </div>
             ) */}
-            {check ? (
+            {score < emojisLists.emojisList.length ? (
               <div>
                 <NavBar scoreDetails={{score, topScore, check}} />
                 <WinOrLoseCard
