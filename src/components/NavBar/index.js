@@ -6,6 +6,20 @@ const NavBar = props => {
   console.log(props)
   const {score, topScore} = scoreDetails
 
+  if (score === 12) {
+    return (
+      <nav className="nav-container">
+        <div className="inner-container">
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/game-logo-img.png"
+            alt="emoji logo"
+          />
+          <h1>Emoji Game</h1>
+        </div>
+      </nav>
+    )
+  }
+
   return (
     <nav className="nav-container">
       <div className="inner-container">
