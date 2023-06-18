@@ -31,8 +31,8 @@ const NavBar = props => {
       </div>
 
       <ul className="score-items inner-container">
-        <li>Score :{score}</li>
-        <li>Top Score: {topScore}</li>
+        <p>Score :{score}</p>
+        <p>Top Score: {topScore}</p>
       </ul>
     </nav>
   )
