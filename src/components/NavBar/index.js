@@ -5,7 +5,7 @@ const NavBar = props => {
   const {scoreDetails, checks} = props
   console.log(props)
   const {score, topScore, check} = scoreDetails
-  console.log(checks)
+  // console.log(checks)
   console.log(`check: ${check}`)
 
   if (score === 12) {
